@@ -1,0 +1,56 @@
+---
+title: The Quant Engine
+order: 4
+slug: quant-engine
+summary: Volatility forecasting, strike optimization, and dynamic overwrite — the machine that runs the book.
+description: The Quant Engine — how Human Instinct uses volatility forecasting, strike optimization, and dynamic overwrite percentages to systematically harvest option premium.
+---
+
+Everything upstream is opportunity; the Quant Engine is execution. It turns a
+universe of volatile, ownable assets into a repeatable income stream by deciding
+— continuously and without emotion — *what to sell, where, and how much.*
+
+## 1. Volatility forecasting
+
+We forecast realized volatility per name and compare it to what the options
+market is implying. Premium is only worth selling where implied sits
+meaningfully above our realized forecast; the engine ranks the universe by that
+edge and steers the overwrite toward it. Machine-learning models refine these
+forecasts as new data arrives.
+
+## 2. Strike optimization
+
+Given a forecast, the engine selects strikes that maximize expected income net
+of assignment risk.
+
+- **LEAP options on QQQ** anchor the longer-dated structure, providing a stable
+  base layer of premium and exposure.
+- We lean on the underlying's drift characteristics: **QQQ has finished up at
+  least 5% in roughly 85% of quarters**,[^stat] which shapes how aggressively we
+  can sell upside without surrendering the bulk of participation.
+
+## 3. Dynamic overwrite percentages
+
+We do not overwrite a fixed fraction of the book. The **overwrite percentage is
+dynamic** — scaled up when implied volatility is rich and forecast drift is
+modest, and pulled back when the reverse is true. This is the single most
+important lever for balancing income against upside capture, and it is set by
+the model, not by hand.
+
+## Replicating and extending the income ETFs
+
+A proven reference set already exists in the market. We **build algorithms that
+replicate the NEOS-style income products — QQQI, XQQQI, SPYI** — and then extend
+the same machinery across our own baskets:
+
+- Reproduce the index-overwrite income profile of the established products.
+- **Apply the same strategies across the frontier baskets** to generate
+  incremental income.
+- **Collect premium across AI infrastructure** specifically, where implied
+  volatility is highest.
+
+The goal is not to copy a single product but to own the *method* — a portable
+overwrite engine we can point at any liquid, volatile, optionable asset.
+
+[^stat]: Historical frequency statistic — directional, not a forecast. \{\{ FILL
+    — cite the lookback window and data source for the 85% figure. \}\}

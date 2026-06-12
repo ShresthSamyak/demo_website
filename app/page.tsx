@@ -30,9 +30,22 @@ export default function HomePage() {
           Markets are not merely collections of cash flows. Markets are collections of people.
         </p>
         <p>
-          {'{{ FILL — opening essay prose. This is the introduction to the Human Instinct ' +
-            'thesis. Replace with the supplied text; the structure below (table of contents, ' +
-            'acknowledgments) will remain. }}'}
+          And people, in aggregate, pay dearly to avoid uncertainty. Human Instinct is a
+          quant-enhanced, systematic covered-call income strategy — enhanced with machine learning
+          and automation — built to harvest that premium and distribute it as income.
+        </p>
+        <p>
+          Our approach is to own productive assets, and specifically the volatile compute
+          infrastructure behind the AI and frontier-technology buildout, then monetize their high
+          implied volatility through a disciplined, model-driven overwrite. The strategy targets a
+          12–15% yield tied to large-cap equities, validated by back-testing and executed by
+          software.
+        </p>
+        <p>
+          We are building it in two phases: first, a systematic income strategy proven on a liquid
+          core; then a tokenized quantitative income fund delivering institutional-style
+          covered-call yield to investors worldwide. What follows is the thesis, the blueprint, and
+          the machine that runs it.
         </p>
       </section>
 
