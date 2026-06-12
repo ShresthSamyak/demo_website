@@ -87,7 +87,11 @@ export default function HomePage() {
       <section aria-labelledby="ack-heading" className="prose">
         <h2 id="ack-heading">Acknowledgments</h2>
         <p>
-          {'{{ FILL — acknowledgments. Thank collaborators, advisors, and readers here. }}'}
+          This thesis is the work of the Human Instinct team. Meet the people building it on the{' '}
+          <Link href="/about/">About</Link> page.
+        </p>
+        <p>
+          {'{{ FILL — add thanks to advisors, collaborators, and early readers here. }}'}
         </p>
         <p className="!text-sm text-muted">
           <em>
