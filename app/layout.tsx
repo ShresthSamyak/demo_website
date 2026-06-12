@@ -18,22 +18,23 @@ import { getNavItems } from '@/lib/nav';
 import { buildMetadata, viewport } from '@/lib/seo';
 import { site } from '@/lib/site';
 
-// Reading serif for body + headings.
+// Reading serif for body, headings, masthead, and nav.
+// Only the weights actually used are loaded (400 body, 600 headings/title)
+// plus italic for emphasis — keeps the font payload small for fast loads.
 const newsreader = Newsreader({
   subsets: ['latin'],
   display: 'swap',
   variable: '--font-newsreader',
-  // Optical-size + weights used across the site.
-  weight: ['400', '500', '600'],
+  weight: ['400', '600'],
   style: ['normal', 'italic'],
 });
 
-// UI / nav / footnotes sans.
+// UI / small labels / footnotes sans (tagline, chapter labels, footer).
 const inter = Inter({
   subsets: ['latin'],
   display: 'swap',
   variable: '--font-inter',
-  weight: ['400', '500', '600'],
+  weight: ['400', '500'],
 });
 
 // Default metadata for the whole site (home overrides with its own export too).
@@ -57,7 +58,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
         <Header navItems={navItems} />
 
-        <main id="main-content">{children}</main>
+        <main id="main-content" className="fade-in">
+          {children}
+        </main>
 
         <Footer navItems={navItems} year={year} />
       </body>

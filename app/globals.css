@@ -108,6 +108,59 @@
     margin-block: 3rem;
   }
 
+  /* ---- Navigation links (centered serif masthead nav) -------------------
+     A quiet, professional growing-underline effect on hover/active. */
+  .nav-link {
+    position: relative;
+    color: var(--color-muted);
+    text-decoration: none;
+    transition: color 0.18s ease;
+  }
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -3px;
+    height: 1px;
+    background-color: var(--color-accent);
+    transform: scaleX(0);
+    transform-origin: center;
+    transition: transform 0.22s ease;
+  }
+  .nav-link:hover,
+  .nav-link:focus-visible {
+    color: var(--color-ink);
+  }
+  .nav-link:hover::after,
+  .nav-link:focus-visible::after {
+    transform: scaleX(1);
+  }
+  /* Active page: accent color with a persistent underline. */
+  .nav-link.is-active {
+    color: var(--color-accent);
+  }
+  .nav-link.is-active::after {
+    transform: scaleX(1);
+  }
+
+  /* Gentle, professional entrance for page content. */
+  @media (prefers-reduced-motion: no-preference) {
+    .fade-in {
+      animation: fade-in-up 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+  }
+  @keyframes fade-in-up {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
   /* "Skip to content" link — visually hidden until focused. */
   .skip-link {
     position: absolute;
@@ -160,12 +213,12 @@
     }
   }
 
-  /* Headings: serif, medium weight, tighter leading, generous space above. */
+  /* Headings: serif, semibold, tighter leading, generous space above. */
   .prose :is(h1, h2, h3, h4) {
     font-family: var(--font-serif);
-    font-weight: 500;
+    font-weight: 600;
     line-height: 1.2;
-    letter-spacing: -0.01em;
+    letter-spacing: -0.011em;
   }
   .prose h2 {
     font-size: 1.6em;
