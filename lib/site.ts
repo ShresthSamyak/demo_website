@@ -19,8 +19,8 @@ export const site = {
   /** Publication date shown in the author/date line (ISO + display form). */
   publishedISO: '2026-06-13',
   publishedDisplay: 'June 2026',
-  /** Default social share image (placeholder lives in /public). */
-  ogImage: '/og-image.png',
+  /** Default social share image (placeholder lives in /public; swap for a 1200x630 PNG). */
+  ogImage: '/og-image.svg',
   /** Theme color for the browser chrome (matches paper-white background). */
   themeColor: '#FCFCFA',
   /** Path to the downloadable full-thesis PDF placeholder in /public. */
