@@ -1,0 +1,253 @@
+/* ============================================================================
+   Human Instinct — global stylesheet & design tokens (Tailwind CSS v4)
+   ----------------------------------------------------------------------------
+   Tailwind v4 is configured in CSS (no tailwind.config.js). The @theme block
+   below defines the design tokens; they become both CSS custom properties
+   (var(--color-ink)) and Tailwind utilities (text-ink, bg-paper, etc.).
+   ========================================================================== */
+
+@import 'tailwindcss';
+
+/* The official typography plugin powers the `prose` reading column. */
+@plugin '@tailwindcss/typography';
+
+/* ---------------------------------------------------------------------------
+   Design tokens — near-monochrome "warm paper" palette + serif/sans pairing.
+   --font-serif / --font-sans are wired to the next/font variables set on
+   <html> in app/layout.tsx so there is no flash of unstyled / shifted text.
+   --------------------------------------------------------------------------- */
+@theme {
+  /* Palette */
+  --color-paper: #fcfcfa; /* warm paper-white background */
+  --color-ink: #1a1a1a; /* primary text */
+  --color-muted: #6b6b6b; /* secondary / footnote text */
+  --color-accent: #1f3a5f; /* deep ink navy — links, rules, active nav */
+  --color-rule: #e4e2dc; /* thin 1px hairline dividers */
+  --color-rule-strong: #1f3a5f; /* masthead accent rule */
+
+  /* Typefaces (variables provided by next/font in the root layout) */
+  --font-serif: var(--font-newsreader), Georgia, 'Times New Roman', serif;
+  --font-sans: var(--font-inter), system-ui, -apple-system, sans-serif;
+
+  /* Reading measure */
+  --measure: 680px;
+}
+
+/* ---------------------------------------------------------------------------
+   Base layer
+   --------------------------------------------------------------------------- */
+@layer base {
+  html {
+    /* Slightly muted to avoid harsh pure-white; respects user font scaling. */
+    background-color: var(--color-paper);
+    color: var(--color-ink);
+    -webkit-text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    font-family: var(--font-serif);
+    background-color: var(--color-paper);
+    color: var(--color-ink);
+    /* Body 18px mobile → 20px desktop (set on the prose container too). */
+    font-size: 1.125rem;
+    line-height: 1.65;
+  }
+
+  /* Selection uses a faint accent wash for a cohesive feel. */
+  ::selection {
+    background-color: color-mix(in srgb, var(--color-accent) 18%, transparent);
+  }
+
+  /* Strong, visible focus state for keyboard users on every interactive el. */
+  :where(a, button, input, summary, [tabindex]):focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  /* Respect users who prefer reduced motion: kill non-essential animation. */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+
+  /* Smooth in-page jumps (footnotes) only when motion is allowed. */
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Components / utilities
+   --------------------------------------------------------------------------- */
+@layer components {
+  /* The single centered reading column used across every page. */
+  .reading-column {
+    width: 100%;
+    max-width: var(--measure);
+    margin-inline: auto;
+    padding-inline: 1.25rem; /* 20px min on mobile */
+  }
+
+  /* Thin hairline divider used between sections. */
+  .rule {
+    height: 1px;
+    border: 0;
+    background-color: var(--color-rule);
+    margin-block: 3rem;
+  }
+
+  /* "Skip to content" link — visually hidden until focused. */
+  .skip-link {
+    position: absolute;
+    left: 0.75rem;
+    top: -3rem;
+    z-index: 100;
+    padding: 0.5rem 0.875rem;
+    background-color: var(--color-accent);
+    color: var(--color-paper);
+    font-family: var(--font-sans);
+    font-size: 0.875rem;
+    border-radius: 4px;
+    transition: top 0.15s ease;
+  }
+  .skip-link:focus {
+    top: 0.75rem;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Reading column — typography plugin customization
+   Tailwind's `prose` is tuned here to the Human Instinct design: serif body,
+   navy underlined links, hairline rules, muted GFM footnotes, figure spacing.
+   --------------------------------------------------------------------------- */
+@layer components {
+  .prose {
+    /* Map the plugin's CSS variables onto our palette. */
+    --tw-prose-body: var(--color-ink);
+    --tw-prose-headings: var(--color-ink);
+    --tw-prose-links: var(--color-accent);
+    --tw-prose-bold: var(--color-ink);
+    --tw-prose-counters: var(--color-muted);
+    --tw-prose-bullets: var(--color-rule);
+    --tw-prose-hr: var(--color-rule);
+    --tw-prose-quotes: var(--color-ink);
+    --tw-prose-quote-borders: var(--color-accent);
+    --tw-prose-captions: var(--color-muted);
+    --tw-prose-code: var(--color-ink);
+
+    font-family: var(--font-serif);
+    color: var(--color-ink);
+    font-size: 1.125rem; /* 18px mobile */
+    line-height: 1.65;
+    max-width: none; /* width is controlled by .reading-column */
+  }
+
+  @media (min-width: 640px) {
+    .prose {
+      font-size: 1.25rem; /* 20px desktop */
+    }
+  }
+
+  /* Headings: serif, medium weight, tighter leading, generous space above. */
+  .prose :is(h1, h2, h3, h4) {
+    font-family: var(--font-serif);
+    font-weight: 500;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+  }
+  .prose h2 {
+    font-size: 1.6em;
+    margin-top: 2em;
+    margin-bottom: 0.6em;
+  }
+  .prose h3 {
+    font-size: 1.25em;
+    margin-top: 1.6em;
+    margin-bottom: 0.5em;
+  }
+
+  /* Links: subtle underline at rest, accent + thicker underline on hover. */
+  .prose a {
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 2px;
+    text-decoration-color: color-mix(in srgb, var(--color-accent) 40%, transparent);
+    transition: text-decoration-color 0.15s ease, color 0.15s ease;
+  }
+  .prose a:hover {
+    color: var(--color-accent);
+    text-decoration-color: var(--color-accent);
+  }
+
+  /* Hairline horizontal rules. */
+  .prose hr {
+    border-color: var(--color-rule);
+    margin-block: 3rem;
+  }
+
+  /* Blockquotes: thin accent rule, unitalicized. */
+  .prose blockquote {
+    font-style: normal;
+    border-left-width: 2px;
+    color: var(--color-muted);
+  }
+
+  /* ---- GitHub-flavored Markdown footnotes (remark-gfm) -------------------
+     remark-gfm emits a <section data-footnotes> with a numbered <ol> and
+     back-reference links. Render it smaller, muted, sans-serif, after a rule. */
+  .prose .footnotes {
+    font-family: var(--font-sans);
+    font-size: 0.875rem;
+    line-height: 1.6;
+    color: var(--color-muted);
+    margin-top: 3.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--color-rule);
+  }
+  .prose .footnotes h2.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+  }
+  /* Superscript reference markers in the body. */
+  .prose sup a[data-footnote-ref] {
+    font-family: var(--font-sans);
+    font-size: 0.7em;
+    text-decoration: none;
+    padding-inline: 0.15em;
+  }
+  .prose .footnotes a {
+    color: var(--color-accent);
+  }
+
+  /* Captioned figures (see components/Figure.tsx). */
+  .prose figure {
+    margin-block: 2.5rem;
+  }
+  .prose figure img {
+    border-radius: 2px;
+    width: 100%;
+    height: auto;
+  }
+  .prose figcaption {
+    font-family: var(--font-sans);
+    font-size: 0.8125rem;
+    color: var(--color-muted);
+    text-align: center;
+    margin-top: 0.75rem;
+  }
+}
