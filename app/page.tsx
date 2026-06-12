@@ -18,28 +18,15 @@ export default function HomePage() {
   const first = chapters[0];
 
   return (
-    <article className="reading-column py-12 sm:py-16">
-      {/* ---- Masthead --------------------------------------------------- */}
-      <header className="text-center">
-        <h1 className="font-sans text-2xl font-semibold uppercase leading-tight tracking-[0.3em] text-ink sm:text-3xl">
-          Human Instinct
-        </h1>
-        <p className="mt-4 font-sans text-sm uppercase tracking-[0.18em] text-muted">
-          {site.tagline}
-        </p>
-        {/* Accent masthead rule */}
-        <hr
-          className="mx-auto mt-6 h-px w-16 border-0"
-          style={{ backgroundColor: 'var(--color-accent)' }}
-        />
-        <p className="mt-6 font-sans text-sm text-muted">
-          {site.author} · {site.publishedDisplay}
-        </p>
-      </header>
+    <article className="reading-column py-10 sm:py-14">
+      {/* Author / date line (the masthead now lives in the site header). */}
+      <p className="text-center font-sans text-sm text-muted">
+        {site.author} · {site.publishedDisplay}
+      </p>
 
       {/* ---- Opening prose --------------------------------------------- */}
-      <section className="prose mt-14">
-        <p className="text-xl sm:text-2xl">
+      <section className="prose mt-12">
+        <p className="!mt-0 text-2xl !leading-snug sm:text-[1.75rem]">
           Markets are not merely collections of cash flows. Markets are collections of people.
         </p>
         <p>
@@ -68,7 +55,7 @@ export default function HomePage() {
               <div>
                 <Link
                   href={`/${chapter.slug}/`}
-                  className="font-serif text-xl text-ink no-underline hover:text-accent sm:text-2xl"
+                  className="font-serif text-xl text-ink no-underline transition-colors hover:text-accent sm:text-2xl"
                 >
                   {chapter.title}
                 </Link>
