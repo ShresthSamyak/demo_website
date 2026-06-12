@@ -3,10 +3,13 @@
 /**
  * Header — the only Client Component on the site (the only shipped JS).
  *
- * A minimal sticky top bar: the site name links home on the left; a "Contents"
- * menu on the right lists every chapter plus the PDF and About. On mobile the
- * menu collapses behind a hamburger button that toggles it. Active nav items
- * are highlighted via usePathname().
+ * Modeled on situational-awareness.ai: a CENTERED masthead (serif site title +
+ * tagline) with the navigation flowing/wrapping beneath it in the same reading
+ * serif. Active link is rendered in the accent navy. It is not sticky — it
+ * scrolls away like a print masthead.
+ *
+ * On mobile the wrapping nav collapses behind a single "Contents" toggle
+ * (the lone piece of interactivity / JS on the site).
  *
  * Nav items are passed in from the (server) root layout so this component never
  * touches the filesystem.
@@ -47,34 +50,19 @@ export default function Header({ navItems }: { navItems: NavItem[] }) {
     href === '/' ? pathname === '/' : pathname.startsWith(href);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-rule bg-paper/90 backdrop-blur-sm">
-      <div className="reading-column flex items-center justify-between py-3">
-        {/* Masthead / home link */}
-        <Link
-          href="/"
-          className="font-sans text-sm font-semibold uppercase tracking-[0.18em] text-ink no-underline hover:text-accent"
-        >
-          {site.name}
-        </Link>
-
-        {/* Hamburger — visible on mobile only */}
-        <button
-          type="button"
-          className="font-sans text-sm text-ink sm:hidden"
-          aria-expanded={open}
-          aria-controls={menuId}
-          aria-label={open ? 'Close contents menu' : 'Open contents menu'}
-          onClick={() => setOpen((v) => !v)}
-        >
-          <span aria-hidden="true" className="mr-1 inline-block">
-            {open ? '✕' : '☰'}
+    <header className="border-b border-rule pt-12 pb-8 text-center sm:pt-16">
+      {/* Masthead — the site title doubles as the home link. */}
+      <div className="mx-auto max-w-4xl px-5">
+        <Link href="/" className="inline-block no-underline">
+          <span className="font-serif text-3xl font-semibold uppercase leading-none tracking-[0.22em] text-ink transition-colors hover:text-accent sm:text-4xl">
+            {site.name}
           </span>
-          Contents
-        </button>
+        </Link>
+        <p className="mt-3 font-serif text-lg italic text-muted sm:text-xl">{site.tagline}</p>
 
-        {/* Desktop nav */}
-        <nav aria-label="Primary" className="hidden sm:block">
-          <ul className="flex items-center gap-5 font-sans text-sm">
+        {/* Desktop / tablet: centered wrapping nav in the reading serif. */}
+        <nav aria-label="Primary" className="mt-8 hidden sm:block">
+          <ul className="mx-auto flex max-w-3xl flex-wrap items-center justify-center gap-x-7 gap-y-3 font-serif text-[1.05rem]">
             {navItems.map((item) => (
               <li key={item.href}>
                 <NavLink item={item} active={isActive(item.href)} />
@@ -82,16 +70,27 @@ export default function Header({ navItems }: { navItems: NavItem[] }) {
             ))}
           </ul>
         </nav>
+
+        {/* Mobile: single toggle that reveals a stacked menu. */}
+        <div className="mt-6 sm:hidden">
+          <button
+            type="button"
+            className="nav-link font-serif text-lg text-ink"
+            aria-expanded={open}
+            aria-controls={menuId}
+            onClick={() => setOpen((v) => !v)}
+          >
+            Contents{' '}
+            <span aria-hidden="true" className="inline-block">
+              {open ? '▴' : '▾'}
+            </span>
+          </button>
+        </div>
       </div>
 
       {/* Mobile dropdown nav */}
-      <nav
-        id={menuId}
-        aria-label="Contents"
-        hidden={!open}
-        className="border-t border-rule bg-paper sm:hidden"
-      >
-        <ul className="reading-column flex flex-col gap-1 py-4 font-sans text-base">
+      <nav id={menuId} aria-label="Contents" hidden={!open} className="mt-2 sm:hidden">
+        <ul className="mx-auto flex max-w-sm flex-col gap-1 px-5 py-2 font-serif text-lg">
           {navItems.map((item) => (
             <li key={item.href}>
               <NavLink item={item} active={isActive(item.href)} block />
@@ -103,7 +102,7 @@ export default function Header({ navItems }: { navItems: NavItem[] }) {
   );
 }
 
-/** A single nav link, styled for active state and external/download targets. */
+/** A single nav link with the animated underline + active accent styling. */
 function NavLink({
   item,
   active,
@@ -113,20 +112,11 @@ function NavLink({
   active: boolean;
   block?: boolean;
 }) {
-  const base = block ? 'block py-2' : '';
-  const className = `${base} no-underline transition-colors ${
-    active ? 'text-accent font-medium' : 'text-muted hover:text-ink'
-  }`;
+  const className = `nav-link ${block ? 'block py-2' : ''} ${active ? 'is-active' : ''}`;
 
   if (item.external) {
     return (
-      <a
-        href={item.href}
-        className={className}
-        // PDF opens in a new tab; rel guards the opener.
-        target="_blank"
-        rel="noopener"
-      >
+      <a href={item.href} className={className} target="_blank" rel="noopener">
         {item.label}
       </a>
     );
