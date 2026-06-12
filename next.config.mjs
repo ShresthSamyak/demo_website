@@ -20,8 +20,12 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
-  // Surface lint/type errors at build time rather than silently passing.
-  eslint: { ignoreDuringBuilds: false },
+  // Pin the workspace root to this folder (a stray lockfile in the home
+  // directory otherwise makes Next infer the wrong root).
+  turbopack: {
+    root: import.meta.dirname,
+  },
+  // Surface type errors at build time rather than silently passing.
   typescript: { ignoreBuildErrors: false },
 };
 
