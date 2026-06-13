@@ -12,21 +12,24 @@ export const metadata: Metadata = buildMetadata({
   path: '/about/',
 });
 
-/** The team. Add a member by appending to this array. */
+/** The team. Add a member by appending to this array (drop a matching photo in /public/team). */
 const team = [
   {
     name: 'Yusuf',
     role: 'Chief Executive Officer',
+    photo: '/team/yusuf.webp',
     bio: '{{ FILL — short bio for Yusuf (CEO). }}',
   },
   {
     name: 'Ranjeet Kumar',
     role: 'Developer',
+    photo: '/team/ranjeet-kumar.webp',
     bio: '{{ FILL — short bio for Ranjeet Kumar (Developer). }}',
   },
   {
     name: 'Shresth Samyak',
     role: 'Developer',
+    photo: '/team/shresth-samyak.webp',
     bio: '{{ FILL — short bio for Shresth Samyak (Developer). }}',
   },
 ] as const;
@@ -66,12 +69,26 @@ export default function AboutPage() {
         >
           Team
         </h2>
-        <ul className="mt-8 flex flex-col gap-8">
+        <ul className="mt-8 flex flex-col gap-10">
           {team.map((member) => (
-            <li key={member.name}>
-              <h3 className="font-serif text-xl font-semibold text-ink">{member.name}</h3>
-              <p className="font-sans text-sm uppercase tracking-wide text-accent">{member.role}</p>
-              <p className="prose mt-2 !text-base">{member.bio}</p>
+            <li key={member.name} className="flex flex-col gap-5 sm:flex-row sm:items-start">
+              {/* eslint-disable-next-line @next/next/no-img-element -- static export, optimizer disabled */}
+              <img
+                src={member.photo}
+                alt={`Portrait of ${member.name}`}
+                width={96}
+                height={96}
+                loading="lazy"
+                decoding="async"
+                className="h-24 w-24 shrink-0 rounded-full object-cover ring-1 ring-rule"
+              />
+              <div>
+                <h3 className="font-serif text-xl font-semibold text-ink">{member.name}</h3>
+                <p className="font-sans text-sm uppercase tracking-wide text-accent">
+                  {member.role}
+                </p>
+                <p className="prose mt-2 !text-base">{member.bio}</p>
+              </div>
             </li>
           ))}
         </ul>
