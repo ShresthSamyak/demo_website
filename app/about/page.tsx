@@ -48,16 +48,14 @@ export default function AboutPage() {
       <div className="prose">
         <h2>The fund</h2>
         <p>
-          {site.name} is a quant-enhanced, systematic covered-call income strategy. We own
-          productive assets — large-cap equities and the volatile compute infrastructure behind the
-          AI and frontier-technology buildout — and monetize their high implied volatility through a
-          disciplined, machine-learning-driven overwrite, targeting a 12–15% income yield.
+          {site.name} is a quantitative covered-call income fund. We seek long-term exposure to
+          innovation while generating durable cash flow through disciplined option strategies,
+          combining advanced quantitative research with human judgment.
         </p>
         <p>
-          The strategy is being built in two phases: a systematic income strategy proven on a liquid
-          core, followed by a tokenized quantitative income fund delivering institutional-style
-          covered-call yield to global investors. Read the full argument starting with{' '}
-          <Link href="/thesis/">The Thesis</Link>.
+          Our conviction is simple: in a world increasingly dominated by algorithms, the ultimate
+          edge remains understanding the people who use them. Read the full argument starting with{' '}
+          <Link href="/philosophy/">A Philosophy of Markets</Link>.
         </p>
       </div>
 
