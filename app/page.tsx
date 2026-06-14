@@ -30,22 +30,16 @@ export default function HomePage() {
           Markets are not merely collections of cash flows. Markets are collections of people.
         </p>
         <p>
-          And people, in aggregate, pay dearly to avoid uncertainty. Human Instinct is a
-          quant-enhanced, systematic covered-call income strategy — enhanced with machine learning
-          and automation — built to harvest that premium and distribute it as income.
+          The investment industry has spent decades trying to remove human emotion from
+          decision-making. Yet despite unprecedented access to information, markets remain governed
+          by the same force that has driven them for centuries: human behavior.
         </p>
         <p>
-          Our approach is to own productive assets, and specifically the volatile compute
-          infrastructure behind the AI and frontier-technology buildout, then monetize their high
-          implied volatility through a disciplined, model-driven overwrite. The strategy targets a
-          12–15% yield tied to large-cap equities, validated by back-testing and executed by
-          software.
-        </p>
-        <p>
-          We are building it in two phases: first, a systematic income strategy proven on a liquid
-          core; then a tokenized quantitative income fund delivering institutional-style
-          covered-call yield to investors worldwide. What follows is the thesis, the blueprint, and
-          the machine that runs it.
+          Human Instinct is a quantitative covered-call income fund built on a simple conviction —
+          that understanding the people behind markets remains the most durable edge in investing.
+          What follows is our thesis: on markets, on compounding through income, on the AI
+          infrastructure buildout, and on the partnership of human judgment and machine
+          intelligence.
         </p>
       </section>
 
