@@ -18,19 +18,19 @@ const team = [
     name: 'Yusuf',
     role: 'Chief Executive Officer',
     photo: '/team/yusuf.webp',
-    bio: '{{ FILL — short bio for Yusuf (CEO). }}',
+    bio: 'Chief Executive Officer of Mytix and a technology founder based in Phoenix, Arizona. An Arizona State University alumnus, Yusuf leads Human Instinct’s vision, strategy, and growth.',
   },
   {
     name: 'Ranjeet Kumar',
-    role: 'Developer',
+    role: 'Quantitative Researcher',
     photo: '/team/ranjeet-kumar.webp',
-    bio: '{{ FILL — short bio for Ranjeet Kumar (Developer). }}',
+    bio: 'An AI and quantitative researcher specializing in machine learning, stochastic modeling, and systematic trading. Studying AI at IIT Patna with experience at Scale AI, Ranjeet develops the quantitative research and alpha strategies behind the fund.',
   },
   {
     name: 'Shresth Samyak',
-    role: 'Developer',
+    role: 'Engineering',
     photo: '/team/shresth-samyak.webp',
-    bio: '{{ FILL — short bio for Shresth Samyak (Developer). }}',
+    bio: 'A Data Science and Artificial Intelligence engineer at Thapar Institute (TIET) and an open-source developer. Shresth builds the quantitative systems, automation, and infrastructure that power Human Instinct.',
   },
 ] as const;
 
