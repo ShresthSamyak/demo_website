@@ -18,18 +18,21 @@ const team = [
     name: 'Yusuf',
     role: 'Chief Executive Officer',
     photo: '/team/yusuf.webp',
+    linkedin: 'https://www.linkedin.com/in/yusuf-saleem/',
     bio: 'Chief Executive Officer of Mytix and a technology founder based in Phoenix, Arizona. An Arizona State University alumnus, Yusuf leads Human Instinct’s vision, strategy, and growth.',
   },
   {
     name: 'Ranjeet Kumar',
     role: 'Quantitative Researcher',
     photo: '/team/ranjeet-kumar.webp',
+    linkedin: 'https://www.linkedin.com/in/ranjeet-kumar-1293731b3/',
     bio: 'An AI and quantitative researcher specializing in machine learning, stochastic modeling, and systematic trading. Studying AI at IIT Patna with experience at Scale AI, Ranjeet develops the quantitative research and alpha strategies behind the fund.',
   },
   {
     name: 'Shresth Samyak',
     role: 'Engineering',
     photo: '/team/shresth-samyak.webp',
+    linkedin: 'https://www.linkedin.com/in/shresthsamyak/',
     bio: 'A Data Science and Artificial Intelligence engineer and an open-source developer. Shresth builds the quantitative systems, automation, and infrastructure that power Human Instinct.',
   },
 ] as const;
@@ -81,11 +84,30 @@ export default function AboutPage() {
                 className="h-24 w-24 shrink-0 rounded-full object-cover ring-1 ring-rule"
               />
               <div>
-                <h3 className="font-serif text-xl font-semibold text-ink">{member.name}</h3>
+                <h3 className="font-serif text-xl font-semibold text-ink">
+                  <a
+                    href={member.linkedin}
+                    target="_blank"
+                    rel="noopener"
+                    className="no-underline hover:text-accent"
+                  >
+                    {member.name}
+                  </a>
+                </h3>
                 <p className="font-sans text-sm uppercase tracking-wide text-accent">
                   {member.role}
                 </p>
                 <p className="prose mt-2 !text-base">{member.bio}</p>
+                <p className="mt-2">
+                  <a
+                    href={member.linkedin}
+                    target="_blank"
+                    rel="noopener"
+                    className="font-sans text-sm text-muted no-underline hover:text-accent"
+                  >
+                    LinkedIn ↗
+                  </a>
+                </p>
               </div>
             </li>
           ))}
@@ -96,7 +118,17 @@ export default function AboutPage() {
 
       <div className="prose">
         <h2>Contact</h2>
-        <p>{'{{ FILL — contact details / how to get in touch. }}'}</p>
+        <p>Reach the team on LinkedIn:</p>
+        <ul>
+          {team.map((member) => (
+            <li key={member.name}>
+              <a href={member.linkedin} target="_blank" rel="noopener">
+                {member.name}
+              </a>{' '}
+              — {member.role}
+            </li>
+          ))}
+        </ul>
         <p>
           Download the{' '}
           <a href={site.pdfPath} target="_blank" rel="noopener">
