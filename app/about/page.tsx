@@ -12,6 +12,21 @@ export const metadata: Metadata = buildMetadata({
   path: '/about/',
 });
 
+/** LinkedIn glyph (brand blue) used beside contact links. */
+function LinkedInIcon({ className = '' }: { className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      aria-hidden="true"
+      focusable="false"
+      className={className}
+      fill="#0A66C2"
+    >
+      <path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.55V9h3.57v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.22.79 24 1.77 24h20.45c.98 0 1.78-.78 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z" />
+    </svg>
+  );
+}
+
 /** The team. Add a member by appending to this array (drop a matching photo in /public/team). */
 const team = [
   {
@@ -103,9 +118,10 @@ export default function AboutPage() {
                     href={member.linkedin}
                     target="_blank"
                     rel="noopener"
-                    className="font-sans text-sm text-muted no-underline hover:text-accent"
+                    className="inline-flex items-center gap-1.5 font-sans text-sm text-muted no-underline hover:text-accent"
                   >
-                    LinkedIn ↗
+                    <LinkedInIcon className="h-4 w-4" />
+                    LinkedIn
                   </a>
                 </p>
               </div>
@@ -119,13 +135,24 @@ export default function AboutPage() {
       <div className="prose">
         <h2>Contact</h2>
         <p>Reach the team on LinkedIn:</p>
-        <ul>
+        <ul className="!list-none !pl-0">
           {team.map((member) => (
-            <li key={member.name}>
-              <a href={member.linkedin} target="_blank" rel="noopener">
-                {member.name}
-              </a>{' '}
-              — {member.role}
+            <li key={member.name} className="!my-2 flex items-center gap-3">
+              <a
+                href={member.linkedin}
+                target="_blank"
+                rel="noopener"
+                aria-label={`${member.name} on LinkedIn`}
+                className="inline-flex shrink-0"
+              >
+                <LinkedInIcon className="h-5 w-5" />
+              </a>
+              <span>
+                <a href={member.linkedin} target="_blank" rel="noopener">
+                  {member.name}
+                </a>{' '}
+                — {member.role}
+              </span>
             </li>
           ))}
         </ul>
