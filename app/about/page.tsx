@@ -30,7 +30,7 @@ const team = [
     name: 'Shresth Samyak',
     role: 'Engineering',
     photo: '/team/shresth-samyak.webp',
-    bio: 'A Data Science and Artificial Intelligence engineer at Thapar Institute (TIET) and an open-source developer. Shresth builds the quantitative systems, automation, and infrastructure that power Human Instinct.',
+    bio: 'A Data Science and Artificial Intelligence engineer and an open-source developer. Shresth builds the quantitative systems, automation, and infrastructure that power Human Instinct.',
   },
 ] as const;
 
